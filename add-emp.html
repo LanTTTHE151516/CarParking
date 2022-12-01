@@ -1,0 +1,489 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text-html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Home page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+            crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+            integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <style>
+                .btn-info {
+                    color: white;
+                    background-color: #5BC0DE;
+                    --bs-btn-border-color: #88ccd9;
+                }
+        
+                .btn-warning {
+                    color: white;
+                }
+        
+                .btn-success {
+                    background-color: #5CB85C;
+                    --bs-btn-border-color: #92A992;
+                }
+        
+                label span {
+                    color: red;
+                }
+        
+                .form-check-input:checked[type=radio] {
+                    background-image: none;
+                }
+        
+                input[type="radio"] {
+                    /* remove standard background appearance */
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    /* create custom radiobutton appearance */
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    padding: 3px;
+                    /* background-color only for content */
+                    background-clip: content-box;
+                    border: 2px solid #bbbbbb;
+                    background-color: #e7e6e7;
+                    border-radius: 50%;
+                }
+        
+                input[type="radio"]:checked {
+                    background-color: #585858;
+                }
+        
+                .form-check .form-check-input {
+                    margin-left: 0;
+                }
+        
+                input.valid:not(input[type="email"]),
+                textarea.valid {
+                    border-color: #198754;
+                    padding-right: calc(1.5em + 0.75rem);
+                    background-image:
+                        url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+                    background-repeat: no-repeat;
+                    background-position: right calc(0.375em + 0.1875rem) center;
+                    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+                }
+        
+                input.error,
+                textarea.error {
+                    border-color: #dc3545;
+                    padding-right: calc(1.5em + 0.75rem);
+                    background-image:
+                        url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+                    background-repeat: no-repeat;
+                    background-position: right calc(0.375em + 0.1875rem) center;
+                    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+                }
+        
+                label.error {
+                    width: 100%;
+                    margin-top: 0.25rem;
+                    font-size: 0.875em;
+                    color: #dc3545;
+                }
+            </style>
+        
+        
+
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg bg-light">
+                <div class="container-fluid row">
+                    <a class="navbar-brand col-3" href="#">
+                        <i class="fa-solid fa-users"></i>
+                        Employee
+                    </a>
+
+                    <div class="collapse navbar-collapse col-9" id="navbarScroll">
+                        <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                            <li class="nav-item me-4">
+                                <a class="nav-link" href="#">Welcome ${sessionScope.employee.employeeName}</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="h-100">
+            <div class="container-fluids row h-100">
+                <!-- sidebar -->
+                <div class="col-3 bg-light" id="sidebar" style="padding: 0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item px-4 py-2" id="dashboard">
+                            <a href="#" class="w-100 d-block">
+                                <i class="fa-solid fa-gauge"></i>
+                                Dashboard
+                            </a>
+                        </li>
+
+                        <li class="list-group-item sidebar-dropdown">
+                            <a href="#" class="d-flex align-items-center px-4 py-2">
+                                <i class="fa-solid fa-chart-column"></i>
+                                <span class="ms-1">Employee manager</span>
+                                <i class="fa-solid fa-angle-left ms-auto"></i>
+                                <i class="fa-solid fa-chevron-down ms-auto d-none"></i>
+                            </a>
+
+                            <ul class="list-group list-group-flush sidebar-submenu show" style="display: none;">
+                                <li class="sidebar-submenu-item px-5 py-2" id="emp-list">
+                                    <a href="#">
+                                        <i class="fa-solid fa-list"></i>
+                                        Employee list
+                                    </a>
+                                </li>
+                                <li class="sidebar-submenu-item px-5 py-2" id="add-emp">
+                                    <a href="add-emp.html">
+                                        <i class="fa-solid fa-plus"></i>
+                                        Add Employee
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+<!-- addd -->
+                <!-- content -->
+                <div class="col-9 p-5 border" id="content">
+                    <h1 class="fw-normal">Add Employee</h1>
+
+                    <hr class="mb-4" />
+                
+                    <div id="mess"></div>
+                
+                    <form class="p-4" id="add-employee">
+                        <!-- Full name -->
+                        <div class="row mb-3">
+                            <label for="fullName" class="col-sm-2 col-form-label fw-semibold">
+                                Full name <span>(*)</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter full name">
+                            </div>
+                        </div>
+                
+                        <!-- Phone number -->
+                        <div class="row mb-3">
+                            <label for="phone" class="col-sm-2 col-form-label fw-semibold">
+                                Phone number <span>(*)</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone number">
+                            </div>
+                        </div>
+                
+                        <!-- date of birth -->
+                        <div class="row mb-3">
+                            <label for="dob" class="col-sm-2 col-form-label fw-semibold">
+                                Date of birth <span>(*)</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" id="dob" name="dob">
+                                <input style="display: none;" type="date" class="form-control" id="endDate" name="endDate">
+                            </div>
+                        </div>
+                
+                        <!-- sex -->
+                        <div class="row mb-3">
+                            <label for="sex" class="col-sm-2 col-form-label fw-semibold">
+                                Sex <span>(*)</span>
+                            </label>
+                
+                            <div class="col-sm-8 d-flex align-items-center">
+                                <div class="row">
+                                    <div class="col-auto form-check">
+                                        <input class="form-check-input" type="radio" value="0" name="sex" id="male" checked> <label
+                                            class="ms-1 form-check-label fw-semibold" for="male"> Male
+                                        </label>
+                                    </div>
+                
+                                    <div class="col-auto form-check">
+                                        <input class="form-check-input" type="radio" value="1" name="sex" id="female"> <label
+                                            class="ms-1 form-check-label fw-semibold" for="female">
+                                            Female </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Address -->
+                        <div class="row mb-3">
+                            <label for="address" class="col-sm-2 col-form-label fw-semibold">
+                                Address </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
+                            </div>
+                        </div>
+                
+                        <!-- Email -->
+                        <div class="row mb-3">
+                            <label for="email" class="col-sm-2 col-form-label fw-semibold">
+                                Email </label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                            </div>
+                        </div>
+                
+                        <!-- Account -->
+                        <div class="row mb-3">
+                            <label for="account" class="col-sm-2 col-form-label fw-semibold">
+                                Account <span>(*)</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="account" name="account" placeholder="Enter account">
+                            </div>
+                        </div>
+                
+                        <!-- Password -->
+                        <div class="row mb-3">
+                            <label for="password" class="col-sm-2 col-form-label fw-semibold">
+                                Password <span>(*)</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+                            </div>
+                        </div>
+                
+                        <!-- Department -->
+                        <div class="row mb-3">
+                            <label for="department" class="col-sm-2 col-form-label fw-semibold">
+                                Department <span>(*)</span>
+                            </label>
+                            <div class="col-sm-8">
+                                <select class="form-select" id="department" name="department" aria-label="Default select example"
+                                    name="department">
+                                    <option value="booking" selected>Booking</option>
+                                    <option value="trip">Trip</option>
+                                </select>
+                            </div>
+                        </div>
+                
+                        <div class="row mt-5 mb-3">
+                            <div class="col-sm-8 text-center">
+                                <!-- back -->
+                                <a href="#" id="backBtn" type="button" class="btn btn-info me-2">
+                                    <i class="fa-solid fa-backward"></i> Back
+                                </a>
+                
+                                <!-- reset -->
+                                <button type="reset" class="btn btn-warning me-2">
+                                    <i class="fa-solid fa-arrow-rotate-left"></i> Reset
+                                </button>
+                
+                                <!-- add -->
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa-solid fa-plus"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+            integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('.list-group-item > a').click(function () {
+                    $('.list-group-item').removeClass('list-group-item--active');
+                    $(".sidebar-dropdown > a").removeClass('list-group-item--active');
+                    $('.sidebar-submenu-item').removeClass("sidebar-submenu-item--active");
+
+                    if ($(this).closest('.list-group-item').hasClass('sidebar-dropdown')) {
+                        $(this).addClass('list-group-item--active');
+                        $(this).children('i:not(:first-child)').toggleClass('d-none');
+
+                        if ($(this).closest('.sidebar-dropdown').children('.sidebar-submenu').hasClass("show")) {
+                            $(this).closest('.sidebar-dropdown').children('.sidebar-submenu').stop().css('display', 'none').hide().slideDown(200);
+                            $(this).closest('.sidebar-dropdown').children('.sidebar-submenu').removeClass("show");
+                        } else {
+                            $(this).closest('.sidebar-dropdown').children('.sidebar-submenu').stop().css('display', 'none').show().slideUp(200);
+                            $(this).closest('.sidebar-dropdown').children('.sidebar-submenu').addClass("show");
+                        }
+                    } else {
+                        $(this).closest('.list-group-item').addClass('list-group-item--active');
+                    }
+                });
+
+               
+            });
+
+            // add
+            $().ready(function () {
+            var currentDate = new Date();
+            currentDate = currentDate.setFullYear(currentDate
+                .getFullYear() - 18);
+            document.getElementById('endDate').valueAsDate = new Date(
+                currentDate);
+
+            jQuery.validator
+                .addMethod(
+                    "lessThan",
+                    function (value, element, params) {
+
+                        if (!/Invalid|NaN/.test(new Date(
+                            value))) {
+                            return new Date(value) < new Date(
+                                $(params).val());
+                        }
+
+                        return isNaN(value)
+                            && isNaN($(params).val())
+                            || (Number(value) < Number($(
+                                params).val()));
+                    }, 'Must be greater than {0}.');
+
+            jQuery.validator.addMethod("checkPhone", function (phone_number, element) {
+                phone_number = phone_number.replace(/\s+/g, "");
+                return this.optional(element) || phone_number.match(/[0-9]+/);
+            }, "Please specify a valid phone number");
+
+            $("form").validate(
+                {
+                    rules: {
+                        fullName: {
+                            required: true,
+                            maxlength: 50,
+                        },
+                        phone: {
+                            checkPhone: true,
+                            required: true,
+                            maxlength: 10,
+                        },
+                        dob: {
+                            required: true,
+                            lessThan: "#endDate",
+                        },
+                        account: {
+                            required: true,
+                            maxlength: 50,
+                        },
+                        password: {
+                            required: true,
+                            maxlength: 20,
+                        },
+                    },
+
+                    messages: {
+                        fullName: {
+                            required: " Please enter the full name",
+                            maxlength: " The full name has a maximum of 50 characters",
+                        },
+                        phone: {
+                            checkPhone: " Please enter valid phone number",
+                            required: " Please enter the phone number",
+                            maxlength: " The phone number has a maximum of 10 characters",
+                        },
+                        dob: {
+                            required: " Please enter the date of birth",
+                            lessThan: " Employee's old must be greater than 18 years old",
+                        },
+                        account: {
+                            required: " Please enter the account",
+                            maxlength: " The account has a maximum of 50 characters",
+                        },
+                        password: {
+                            required: " Please enter the password",
+                            maxlength: " The password has a maximum of 20 characters",
+                        },
+                    },
+                    submitHandler: function (form) {
+                        $.ajax({
+                            url: "./add-employee",
+                            type: "post",
+                            data: {
+                                department: $('#department').val(),
+                                password: $('#password').val(),
+                                account: $('#account').val(),
+                                email: $('#email').val(),
+                                address: $('#address').val(),
+                                sex: $('#sex').val(),
+                                dob: $('#dob').val(),
+                                phone: $('#phone').val(),
+                                fullName: $('#fullName').val()
+                            },
+                            success: function (result) {
+                                var mess = "";
+                                var alert = "danger";
+
+                                if (result.includes("errorAccount")) {
+                                    mess += "Account already exists.";
+                                }
+                                if (result.includes("errorMaill")) {
+                                    mess += " Email already exists.";
+                                }
+                                if (result === 'success') {
+                                    mess = 'Add successfully';
+                                    alert = 'success';
+                                }
+
+                                $('#mess').html(`<div class="alert alert-` + alert + ` alert-dismissible" role="alert">
+      <div>` + mess + `</div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div >`);
+
+                                $(".alert").fadeTo(5000, 1).slideUp(500, function () {
+                                    $(".alert").slideUp(500);
+                                    $("input").removeClass("error valid");
+                                    $("textarea").removeClass("error valid");
+                                    $("label[id*=title-error], label[id*=phone-error]").remove();
+                                    if (result === 'success') {
+                                        $("input").val("");
+                                    }
+                                });
+                            }
+                        });
+                        return false;
+                    },
+                });
+
+            $("button[type='reset']").click(function () {
+                $("input").removeClass("error valid");
+                $("textarea").removeClass("error valid");
+                $("label[id*=title-error], label[id*=phone-error]").remove();
+            });
+
+            $("#backBtn").click(function () {
+                $.ajax({
+                    url: './view/emp/emp-list.jsp',
+                    dataType: "html",
+                    type: "GET",
+                })
+                    .done(function (data) {
+                        $("#content").html(data);
+                    });
+            });
+
+
+        });
+        </script>
+    </body>
+
+    </html>
